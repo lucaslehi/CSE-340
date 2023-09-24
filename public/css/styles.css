@@ -4,3 +4,148 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* Index Page */
+#top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: black;
+}
+
+.siteName a {
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+#tools a {
+  font-style: italic;
+}
+
+nav {
+  background-color: rgb(39, 38, 38);
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  padding: 10px;
+}
+
+nav li {
+  list-style: none;
+}
+
+nav a {
+  display: block;
+  text-decoration: none;
+}
+
+.dmcdeloreantext {
+  color: rgb(79, 209, 248);
+  background-color: rgba(156, 202, 243, 0.3);
+  width: 10rem;
+  margin-left: 15px;
+  position: absolute;
+}
+
+.dmcdeloreantext h2 {
+  font-weight: bold;
+  margin: auto;
+}
+
+.dmcdeloreantext p {
+  margin: 0;
+}
+
+.dmcdeloreanbutton {
+  background-color: rgb(79, 209, 248);
+  padding: 8px;
+  width: 75%;
+  font-weight: bold;
+  border: none;
+}
+
+.dmcdelorean img {
+  max-width: 90%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.deloreanreviews h2 {
+  /*margin-top: 3rem;*/
+  font-weight: bold;
+}
+
+.deloreanreviews ul li {
+  padding: 5px;
+}
+
+.deloreanreviews ul {
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.deloreanupgrades {
+  margin-bottom: 20px;
+}
+
+.upgrade-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.upgrade {
+  background-color: #04bbdf;
+  padding: 5px;
+  border: 1px solid black;
+  text-align: center;
+  min-width: 48%;
+  box-sizing: border-box;
+}
+
+.upgrade img {
+  max-width: 100%;
+  height: auto;
+}
+
+.upgrade a {
+  color: blue;
+  text-decoration: underline;
+  display: block;
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 650px) {
+  .deloreangrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .upgradecontainer {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    max-width: 90%;
+  }
+
+  .deloreanreviews {
+    grid-column: 2/3;
+  }
+
+  .deloreanreviews ul li {
+    font-size: large;
+    padding-bottom: 1.5rem;
+  }
+
+  body {
+    margin: auto;
+    max-width: fit-content;
+  }
+}
