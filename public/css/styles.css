@@ -116,7 +116,7 @@ nav a {
 }
 
 .upgrade a {
-  color: blue;
+  color: rgb(4, 4, 151);
   text-decoration: underline;
   display: block;
   margin-top: 10px;
