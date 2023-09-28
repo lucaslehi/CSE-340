@@ -148,25 +148,19 @@ nav a {
   body {
     margin: auto;
     max-width: fit-content;
-    /*width: 100%;
+    width: 100%;
     background-color: white;
-    border-bottom: #04bbdf solid 3px;
-    border-left: #04bbdf solid 3px;
-    border-right: #04bbdf solid 3px;*/
+    border: #04bbdf solid 3px;
+    border-radius: 5px;
+    padding: 3%;
   }
 
-  /*#top-header {
-    border-top: #04bbdf solid 3px;
-  }*/
-
-  /*html {
+  html {
     margin: 0 auto;
     background-image: url("../images/site/checkerboard.jpg");
-    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     background-color: white;
     z-index: 1;
-    padding: 0px 10%;
-  }*/
+    padding: 3% 10%;
+  }
 }
