@@ -45,6 +45,11 @@ nav li {
 nav a {
   display: block;
   text-decoration: none;
+  color: white;
+}
+
+nav a:hover {
+  color: rgb(79, 209, 248);
 }
 
 .dmcdeloreantext {
@@ -123,6 +128,29 @@ nav a {
   margin-top: 10px;
 }
 
+/* Inventory */
+#inv-display{
+  list-style-type: none;
+}
+
+#inv-display hr {
+  display: none;
+}
+
+#inv-display a{
+  text-decoration: none;
+  color: black;
+}
+
+.namePrice{
+  margin-bottom: 50px;
+}
+
+#inv-display img{
+  max-width: 90%;
+  margin-left: 2px;
+}
+
 @media screen and (min-width: 650px) {
   .deloreangrid {
     display: grid;
@@ -143,6 +171,20 @@ nav a {
   .deloreanreviews ul li {
     font-size: large;
     padding-bottom: 1.5rem;
+  }
+
+  .vehicle-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .vehicle-container img {
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .vehicle-container div {
+    flex: 2;
   }
 
   body {
