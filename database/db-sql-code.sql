@@ -53,7 +53,7 @@ INSERT INTO public.classification (classification_name)
 VALUES ('Custom'),
 	('Sport'),
 	('SUV'),
-	('truck'),
+	('Truck'),
 	('Sedan');
 
 -- Data for table `inventory`
