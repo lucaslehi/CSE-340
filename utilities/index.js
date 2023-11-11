@@ -25,6 +25,24 @@ Util.getNav = async function (req, res, next) {
 };
 
 /* **************************************
+ * Select Model
+ * ************************************ */
+
+Util.buildClassificationOptions = async function (optionSelected) {
+  let data = await invModel.getClassifications();
+  let options =
+    '<select name="classification_id" id="classification_id" required>';
+  options += "<option value = ''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    options += `<option value ="${row.classification_id}" ${
+      row.classification_id === Number(optionSelected) ? "selected" : ""
+    }>${row.classification_name}</option>`;
+  });
+  options += "</select>";
+  return options;
+};
+
+/* **************************************
  * Build the classification view HTML
  * ************************************ */
 Util.buildClassificationGrid = async function (data) {
@@ -81,35 +99,38 @@ Util.buildClassificationGrid = async function (data) {
  * Build HTML for the vehicle detail view
  * ********************************** */
 Util.buildDetailView = async (data) => {
-  let detail
+  let detail;
   if (data.length > 0) {
-    detail = '<div class="vehicle-container">'
-    data.forEach(vehicle => {
-      detail += 
-      `<div>
+    detail = '<div class="vehicle-container">';
+    data.forEach((vehicle) => {
+      detail += `<div>
         <img src="${vehicle.inv_image}" alt="${vehicle.inv_model}" />
       </div>
       <div>
         <p> ${vehicle.inv_make} ${vehicle.inv_model} Details </p>
-        <p> Price: $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)} </p>
+        <p> Price: $${new Intl.NumberFormat("en-US").format(
+          vehicle.inv_price
+        )} </p>
         <p> Description: ${vehicle.inv_description} </p>
         <p> Color: ${vehicle.inv_color} </p>
-        <p> Miles: ${new Intl.NumberFormat('en-Us').format(vehicle.inv_miles)} </p>
-      </div>`
-    })
-    detail += '</div>'
+        <p> Miles: ${new Intl.NumberFormat("en-Us").format(
+          vehicle.inv_miles
+        )} </p>
+      </div>`;
+    });
+    detail += "</div>";
   } else {
-    detail += '<p class="notice">Sorry, no matching vehicles were found.</p>'
+    detail += '<p class="notice">Sorry, no matching vehicles were found.</p>';
   }
-  return detail
-}
+  return detail;
+};
 
 /* ****************************************
  * Middleware For Handling Errors
- * Wrap other function in this for 
+ * Wrap other function in this for
  * General Error Handling
  **************************************** */
-Util.handleErrors = fn => (req, res, next) => 
-  Promise.resolve(fn(req, res, next)).catch(next)
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
 
 module.exports = Util;

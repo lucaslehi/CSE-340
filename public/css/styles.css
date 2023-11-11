@@ -220,6 +220,32 @@ nav a:hover {
   padding: 5px;
 }
 
+input {
+  border: 2px solid;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin: 0.25rem;
+  min-width: 125px;
+  padding: 0.5rem;
+  transition: background-color 0.5s ease-out;
+}
+
+input:valid {
+  color: rgb(47, 255, 47);
+}
+
+input:invalid {
+  color: red;
+}
+
+input:required:valid {
+  color: rgb(47, 255, 47);
+}
+
+input:required:invalid {
+  color: red;
+}
+
 #pswdBtn {
   cursor: pointer;
   color: blue;

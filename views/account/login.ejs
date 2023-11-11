@@ -1,9 +1,15 @@
 <% if (title) { %>
 <h1><%= title %></h1>
 <% } else { res.redirect('/') } %> <%- messages() %>
-<form action="/" class="login-form">
+<form action="/account/login" method="post" class="login-form">
   <label for="account_email">Email:</label>
-  <input type="email" name="account_email" id="account_email" required />
+  <input
+    type="email"
+    name="account_email"
+    id="account_email"
+    required
+    value="<%= locals.account_email %>"
+  />
   <br /><br />
   <label for="account_password">Password:</label>
   <input
