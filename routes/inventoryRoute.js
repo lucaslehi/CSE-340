@@ -32,6 +32,24 @@ router.get(
   utilities.handleErrors(invController.buildAddInventory)
 );
 
+//AJAX route to get inventory by classification
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
+// Route to edit the inventory form
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+
+// Route to delete the inventory form.
+router.get(
+  "/delete/:inv_id",
+  utilities.handleErrors(invController.deleteInventoryView)
+);
+
 // Add Classification data
 router.post(
   "/add-classification",
@@ -47,5 +65,16 @@ router.post(
   validate.checkInventoryData,
   utilities.handleErrors(invController.addInventory)
 );
+
+// Route to update the inventory form. Week 5, Update Inventory item (Step 2)
+router.post(
+  "/update/",
+  validate.newInventoryRules(),
+  validate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+);
+
+// Route to delete the inventory form.
+router.post("/delete/", utilities.handleErrors(invController.deleteInventory));
 
 module.exports = router;

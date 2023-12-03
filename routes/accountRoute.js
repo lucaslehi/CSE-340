@@ -9,6 +9,9 @@ router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
 );
+router.get("/logout", utilities.handleErrors(accountController.accountLogout));
+
+// Preocess registration attempt
 router.post(
   "/register",
   regValidate.registationRules(),
@@ -17,8 +20,24 @@ router.post(
 );
 
 // Process the login attempt
-router.post("/login", (req, res) => {
-  res.status(200).send("login process");
-});
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+);
+
+// Deliver Account Management View
+router.get(
+  "/",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildAccountManagement)
+);
+
+// Deliver Account Update View
+router.get(
+  "/update/:account_id",
+  utilities.handleErrors(accountController.buildAccountUpdateView)
+);
 
 module.exports = router;

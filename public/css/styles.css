@@ -246,6 +246,10 @@ input:required:invalid {
   color: red;
 }
 
+#submit.submit {
+  color: black;
+}
+
 #pswdBtn {
   cursor: pointer;
   color: blue;
