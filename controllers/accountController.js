@@ -130,9 +130,8 @@ async function buildAccountManagement(req, res, next) {
 }
 
 /* ****************************************
-*  Deliver Update Account view
-   Week 5
-* *************************************** */
+ *  Deliver Update Account view
+ * *************************************** */
 async function buildAccountUpdateView(req, res, next) {
   let nav = await utilities.getNav();
   res.render("account/update", {
