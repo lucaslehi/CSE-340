@@ -146,8 +146,9 @@ async function buildAccountUpdateView(req, res, next) {
  * *************************************** */
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
-  const { account_firstname, account_lastname, account_email, account_id } =
-    req.body;
+  const { account_firstname, account_lastname, account_email } = req.body;
+
+  const account_id = res.locals.accountData.account_id;
 
   const updResult = await accountModel.updateAccount(
     account_firstname,
@@ -166,21 +167,16 @@ async function updateAccount(req, res) {
     res.status(501).render("account/update", {
       title: "Edit Account",
       nav,
-      account_firstname,
-      account_lastname,
-      account_email,
-      account_id,
     });
   }
 }
 
 /* ****************************************
- *  Update Account view
+ *  Update Password view
  * *************************************** */
 async function updatePassword(req, res) {
   let nav = await utilities.getNav();
-  const { account_firstname, account_lastname, account_email, account_id } =
-    req.body;
+  const { account_password } = req.body;
   // Hash the password before storing
   let hashedPassword;
   try {
@@ -191,22 +187,13 @@ async function updatePassword(req, res) {
       "notice",
       "Sorry, the processing for updating the password failed."
     );
-    res.status(500).render("account/update", {
-      title: "Edit Account",
-      nav,
-      errors: null,
-      account_id,
-      account_firstname,
-      account_lastname,
-      account_email,
-    });
   }
 
   const passResult = await accountModel.updatePassword(
     hashedPassword,
     account_id
   );
-
+  console("passResult: " + passResult);
   if (passResult) {
     req.flash("notice", `Congratulations, you\'re password was updated.`);
     res.status(201).render("account/management", {
@@ -219,10 +206,6 @@ async function updatePassword(req, res) {
     res.status(501).render("account/update", {
       title: "Edit Account",
       nav,
-      account_id,
-      account_firstname,
-      account_lastname,
-      account_email,
     });
   }
 }

@@ -27,6 +27,15 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 );
 
+// Process the account update
+router.post("/update", utilities.handleErrors(accountController.updateAccount));
+
+// Process the password update
+router.post(
+  "/update-password",
+  utilities.handleErrors(accountController.updatePassword)
+);
+
 // Deliver Account Management View
 router.get(
   "/",
