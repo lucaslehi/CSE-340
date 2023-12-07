@@ -28,6 +28,18 @@ async function buildRegister(req, res, next) {
   });
 }
 
+/* ******************************************
+ * Deliver Account Management view
+ *******************************************/
+async function buildAccountManagement(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/accountManagement", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  });
+}
+
 /* ****************************************
  *  Process Registration
  * *************************************** */
@@ -117,18 +129,6 @@ async function accountLogin(req, res) {
   }
 }
 
-/* ******************************************
- * Deliver Account Management view
- *******************************************/
-async function buildAccountManagement(req, res, next) {
-  let nav = await utilities.getNav();
-  res.render("account/accountManagement", {
-    title: "Account Management",
-    nav,
-    errors: null,
-  });
-}
-
 /* ****************************************
  *  Deliver Update Account view
  * *************************************** */
@@ -158,7 +158,7 @@ async function updateAccount(req, res) {
   );
   if (updResult) {
     req.flash("notice", `Congratulations, the update was successful.`);
-    res.status(201).render("account/management", {
+    res.status(201).render("account/accountManagement", {
       title: "Account Management",
       nav,
     });
@@ -196,7 +196,7 @@ async function updatePassword(req, res) {
   console("passResult: " + passResult);
   if (passResult) {
     req.flash("notice", `Congratulations, you\'re password was updated.`);
-    res.status(201).render("account/management", {
+    res.status(201).render("account/accountManagement", {
       title: "Account Management",
       nav,
       updateAccount,
