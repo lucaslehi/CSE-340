@@ -9,7 +9,6 @@ router.get(
   "/register",
   utilities.handleErrors(accountController.buildRegister)
 );
-router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
 // Preocess registration attempt
 router.post(
@@ -51,5 +50,7 @@ router.get(
   "/update/:account_id",
   utilities.handleErrors(accountController.buildAccountUpdateView)
 );
+
+router.get("/logout", utilities.handleErrors(accountController.accountLogout));
 
 module.exports = router;

@@ -4,7 +4,7 @@
       res.redirect('/')
     } %>
 
-<% message %>
+<%- messages() %>
 
 
 
@@ -25,7 +25,7 @@
         </div>
         <div>
             <input type="submit" class="submit" name="submit"  id="submit" value="Update">
-            <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>> 
+            <input type="hidden" name="account_id" <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>> 
         </div>
         </fieldset>
     </div>
@@ -50,7 +50,7 @@
 
         <div>
            <input type="submit" class="submit" name="submit"  id="submit" value="Change Password">
-           <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>> 
+           <input type="hidden" name="account_id" <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>" <% } %>> 
         </div>
       </fieldset>
     </div>

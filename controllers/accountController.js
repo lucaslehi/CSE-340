@@ -147,24 +147,28 @@ async function buildAccountUpdateView(req, res, next) {
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
   const { account_firstname, account_lastname, account_email } = req.body;
-
   const account_id = res.locals.accountData.account_id;
-
   const updResult = await accountModel.updateAccount(
     account_firstname,
     account_lastname,
     account_email,
     account_id
   );
+  console.log(updResult);
   if (updResult) {
+    const accessToken = jwt.sign(updResult, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: 3600 * 1000,
+    });
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
     req.flash("notice", `Congratulations, the update was successful.`);
-    res.status(201).render("account/accountManagement", {
+    res.redirect("/account/");
+    /* res.status(201).render("account/accountManagement", {
       title: "Account Management",
       nav,
-    });
+    });*/
   } else {
     req.flash("notice", "Sorry, the update failed.");
-    res.status(501).render("account/update", {
+    res.status(501).render("/account/", {
       title: "Edit Account",
       nav,
     });
@@ -177,6 +181,7 @@ async function updateAccount(req, res) {
 async function updatePassword(req, res) {
   let nav = await utilities.getNav();
   const { account_password } = req.body;
+  const account_id = res.locals.accountData.account_id;
   // Hash the password before storing
   let hashedPassword;
   try {
@@ -193,17 +198,22 @@ async function updatePassword(req, res) {
     hashedPassword,
     account_id
   );
-  console("passResult: " + passResult);
+  console.log("passResult: " + passResult);
   if (passResult) {
-    req.flash("notice", `Congratulations, you\'re password was updated.`);
-    res.status(201).render("account/accountManagement", {
+    const accessToken = jwt.sign(passResult, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: 3600 * 1000,
+    });
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+    req.flash("notice", `Congratulations, your password was updated.`);
+    res.redirect("/account/");
+    /* res.status(201).render("account/accountManagement", {
       title: "Account Management",
       nav,
       updateAccount,
-    });
+    });*/
   } else {
     req.flash("notice", "Sorry, the registration failed.");
-    res.status(501).render("account/update", {
+    res.status(501).render("/account/", {
       title: "Edit Account",
       nav,
     });
@@ -216,7 +226,7 @@ async function updatePassword(req, res) {
 async function accountLogout(req, res) {
   try {
     res.clearCookie("jwt");
-    req.flash("notice", "You have been logged out.");
+    /*req.flash("notice", "You have been logged out.");*/
     res.redirect("/");
   } catch (error) {
     res.redirect("/");
