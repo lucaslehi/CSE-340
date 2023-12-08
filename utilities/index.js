@@ -33,7 +33,7 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationList = async function (optionSelected) {
   let data = await invModel.getClassifications();
   let options =
-    '<select name="classification_id" id="classification_id" required>';
+    '<select name="classification_id" id="classificationList" required>';
   options += "<option value = ''>Choose a Classification</option>";
   data.rows.forEach((row) => {
     options += `<option value ="${row.classification_id}" ${

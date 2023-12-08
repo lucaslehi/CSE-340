@@ -1,12 +1,6 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else { res.redirect('/') } %> <% message %> <% if (errors) { %>
-<ul class="notice">
-  <% errors.array().forEach(error => { %>
-  <li><%= error.msg %></li>
-  <% }) %>
-</ul>
-<% } %>
+<% } else { res.redirect('/') } %> <% message %>
 
 <form action="/inv/delete" method="post" id="deleteForm">
   <div class="form">

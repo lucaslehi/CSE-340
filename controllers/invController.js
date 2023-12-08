@@ -175,9 +175,8 @@ invCont.getInventoryJSON = async (req, res, next) => {
  * ************************** */
 invCont.editInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
-  //const inv_id = parseInt(req.params.invId)
   let nav = await utilities.getNav();
-  const itemData = await invModel.getInventoryByInventoryId(inv_id);
+  const itemData = await invModel.getVehicleByInventoryId(inv_id);
   const classificationSelect = await utilities.buildClassificationList(
     itemData[0].classification_id
   );
@@ -269,7 +268,7 @@ invCont.updateInventory = async function (req, res, next) {
 invCont.deleteInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
-  const itemData = await invModel.getInventoryByInventoryId(inv_id);
+  const itemData = await invModel.getVehicleByInventoryId(inv_id);
   const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`;
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,
