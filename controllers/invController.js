@@ -287,14 +287,57 @@ invCont.deleteInventoryView = async function (req, res, next) {
  * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const inv_id = parseInt(req.body.inv_id);
-  const deleteResult = await invModel.deleteInventoryItem(inv_id);
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const deleteResult = await invModel.deleteInventoryItem(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
   if (deleteResult) {
-    req.flash("notice", `The item was successfully deleted.`);
-    res.redirect("/account/");
+    console.log(deleteResult);
+    const itemName = deleteResult.inv_make + " " + deleteResult.inv_model;
+    console.log(itemName);
+    req.flash("notice", `The ${itemName} was successfully deleted.`);
+    res.redirect("./account/accountManagement");
   } else {
-    req.flash("notice", "Sorry, the deletion failed.");
-    res.redirect("/account/");
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("warning", "Sorry, the deletion failed.");
+    res.status(501).render("./account/accountManagement", {
+      title: "Delete " + itemName,
+      nav,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
   }
 };
 
