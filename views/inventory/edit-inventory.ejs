@@ -1,7 +1,6 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else { %> <% res.redirect('/') %> <% } %> <%= message %> <% if (errors) {
-%>
+<% } else { res.redirect('/') } %> <%- message() %> <% if (errors) { %>
 <ul class="notice">
   <% errors.array().forEach(error => { %>
   <li><%= error.msg %></li>
@@ -131,7 +130,7 @@
           value="Update Vehicle"
           disabled
         />
-        <input type="hidden" name="inv_id" <% if(locals.inv_id) { % />
+        <input type="hidden" name="inv_id" <% if(locals.inv_id) { % /> />
         value="<%= locals.inv_id %>" <% } %> />
       </div>
     </fieldset>
