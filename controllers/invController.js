@@ -84,18 +84,19 @@ invCont.buildAddInventory = async function (req, res, next) {
  * ************************************ */
 invCont.addClassification = async function (req, res) {
   let nav = await utilities.getNav();
+  const classificationSelect = await utilities.buildClassificationList();
   const { classification_name } = req.body;
   const classificationResult = await invModel.addClassification(
     classification_name
   );
 
   if (classificationResult) {
-    nav = await utilities.getNav();
     req.flash("notice", `The ${classification_name} was successfully added.`);
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
       errors: null,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, the add a new classification failed.");
@@ -111,6 +112,7 @@ invCont.addClassification = async function (req, res) {
  * ************************************ */
 invCont.addInventory = async function (req, res) {
   let nav = await utilities.getNav();
+  const classificationSelect = await utilities.buildClassificationList();
   const {
     classification_id,
     inv_make,
@@ -142,6 +144,7 @@ invCont.addInventory = async function (req, res) {
       title: "Vehicle Management",
       nav,
       errors: null,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, the add a new vehicle failed.");
