@@ -70,8 +70,8 @@
         id="submit"
         value="Delete Item"
       />
-      <input type="hidden" name="inv_id" <% if(locals.inv_id) { % /> value="<%=
-      locals.inv_id %>" <% } %>>
+      <input type="hidden" name="inv_id" <%= locals.inv_id ? 'value="' +
+      locals.inv_id + '"' : '' %> />
     </div>
   </div>
 </form>
